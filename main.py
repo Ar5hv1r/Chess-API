@@ -8,10 +8,7 @@ def print_leaderboards():
     categories = data.keys()
 
     for category in categories:
-        print('Category:', category)
-        for idx, entry in enumerate(data[category]):
-            print(entry)
-    
-
+        print('Category:', data[category].keys())
 
 print_leaderboards()
+
