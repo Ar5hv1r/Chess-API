@@ -1,5 +1,6 @@
-from chessdotcom import get_leaderboards, get_player_stats
+from chessdotcom import get_leaderboards, get_player_stats, get_player_game_archives
 import pprint
+import requests
 
 printer = pprint.PrettyPrinter()
 
@@ -28,6 +29,14 @@ def get_player_rating(username):
         else:
             print(f'Current: {data["stats"][category]["highest"]["rating"]}')
 
+def get_most_recent_game(username):
+    data = get_player_game_archives(username).json
+    url = data['archives'][-1]
+    games = requests.get(url).json()
+    game = games['games'][-1]
+    printer.pprint(game)
+
+get_most_recent_game('Ar5hv1r')
 print_leaderboards()
 get_player_rating('Ar5hv1r')
 
