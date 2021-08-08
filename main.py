@@ -37,7 +37,6 @@ def get_most_recent_game(username):
 
 def get_club_admins(url_id):
     data = get_club_details(url_id).json
-    data = get_club_details(url_id).json
     admins = data['club']['admin']
     print('Admins:')
     for info in admins:
