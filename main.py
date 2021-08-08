@@ -1,4 +1,4 @@
-from chessdotcom import get_leaderboards, get_player_stats, get_player_game_archives, get_club_details
+from chessdotcom import get_leaderboards, get_player_stats, get_player_game_archives, get_club_details, get_club_members
 import pprint
 import requests
 
@@ -44,8 +44,24 @@ def get_club_admins(url_id):
         username = info['username']
         print(username)
 
+def get_rapid_rating(username):
+    data = get_player_stats(username).json
+    if 'chess_rapid' in data['stats']:
+        return data["stats"]["chess_rapid"]["last"]["rating"]
+    else:
+        pass
+
+
+def display_club_members(url_id):
+    data = get_club_members(url_id).json
+    all_members = data['members']['all_time']
+    for user in all_members:
+        print('Username:', user["username"], 'Rating:', get_rapid_rating(user["username"]))
+    
+
+
 #get_most_recent_game('Ar5hv1r')
 #print_leaderboards()
 #get_player_rating('Ar5hv1r')
-get_club_admins("tech-with-tim")
-
+#get_club_admins("tech-with-tim")
+display_club_members('tech-with-tim')
