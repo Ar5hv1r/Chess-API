@@ -1,4 +1,4 @@
-from chessdotcom import get_leaderboards, get_player_stats, get_player_game_archives
+from chessdotcom import get_leaderboards, get_player_stats, get_player_game_archives, get_club_details
 import pprint
 import requests
 
@@ -17,7 +17,6 @@ def print_leaderboards():
 
 def get_player_rating(username):
     data = get_player_stats(username).json
-    printer.pprint(data)
     categories = ['chess_blitz', 'chess_rapid', 'tactics']
 
     for category in categories:
@@ -36,7 +35,18 @@ def get_most_recent_game(username):
     game = games['games'][-1]
     printer.pprint(game)
 
-get_most_recent_game('Ar5hv1r')
-print_leaderboards()
-get_player_rating('Ar5hv1r')
+def get_club_admins(url_id):
+    data = get_club_details(url_id).json
+    data = get_club_details(url_id).json
+    admins = data['club']['admin']
+    print('Admins:')
+    for info in admins:
+        info = requests.get(info).json()
+        username = info['username']
+        print(username)
+
+#get_most_recent_game('Ar5hv1r')
+#print_leaderboards()
+#get_player_rating('Ar5hv1r')
+get_club_admins("tech-with-tim")
 
