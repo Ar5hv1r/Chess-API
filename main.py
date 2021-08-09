@@ -1,8 +1,11 @@
 from chessdotcom import get_leaderboards, get_player_stats, get_player_game_archives, get_club_details, get_club_members
 import pprint
 import requests
+import time
+import operator
 
 printer = pprint.PrettyPrinter()
+start_time = time.time()
 
 def print_leaderboards():
     data = get_leaderboards().json
@@ -49,14 +52,18 @@ def get_rapid_rating(username):
     if 'chess_rapid' in data['stats']:
         return data["stats"]["chess_rapid"]["last"]["rating"]
     else:
-        pass
-
+        return 0
 
 def display_club_members(url_id):
     data = get_club_members(url_id).json
     all_members = data['members']['all_time']
+    member_ranking = {}
     for user in all_members:
-        print('Username:', user["username"], 'Rating:', get_rapid_rating(user["username"]))
+        member_ranking[user['username']] = get_rapid_rating(user['username'])
+    
+    ordered = dict(sorted(member_ranking.items(), key=operator.itemgetter(1), reverse=True))
+
+    print(ordered)
     
 
 
@@ -65,3 +72,4 @@ def display_club_members(url_id):
 #get_player_rating('Ar5hv1r')
 #get_club_admins("tech-with-tim")
 display_club_members('tech-with-tim')
+print("Time Taken:", time.time() - start_time)
