@@ -89,7 +89,13 @@ def club_matches(url_id):
     printer.pprint(data)
 
 
-club_matches("tech-with-tim")
+def club_members(url_id):
+    data = get_club_members(url_id).json
+    printer.pprint(data)
+
+
+club_members("tech-with-tim")
+# club_matches("tech-with-tim")
 # club_details("tech-with-tim")
 # get_most_recent_game("Ar5hv1r")
 # print_leaderboards()
