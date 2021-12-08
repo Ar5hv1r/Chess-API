@@ -96,10 +96,47 @@ def club_members(url_id):
 
 def country_clubs(iso_id):
     data = get_country_clubs(iso_id).json
+    club_name = data["clubs"]
+    for idx in range(len(club_name)):
+        printer.pprint(club_name[idx].split("/")[-1])
+
+
+# little information
+def country_details(iso_id):
+    data = get_country_details(iso_id).json
     printer.pprint(data)
 
 
-country_clubs("DK")
+def country_players(iso_id):
+    data = get_country_players(iso_id).json
+    printer.pprint(data)
+
+
+"""
+get daily puzzle
+get player clubs
+get player current games
+get player current games to move
+get player games by month / pgn
+get player team matches
+get player tournaments
+get random daily puzzle
+get streamers
+get team match
+get team match board
+get team match live
+get team match live board
+get titled players
+get tournament details
+get tournament round
+get tournament round group details
+is player online
+"""
+
+
+# country_players("ZW")
+# country_details("ZW")
+# country_clubs("DK")
 # club_members("tech-with-tim")
 # club_matches("tech-with-tim")
 # club_details("tech-with-tim")
