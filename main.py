@@ -94,7 +94,13 @@ def club_members(url_id):
     printer.pprint(data)
 
 
-club_members("tech-with-tim")
+def country_clubs(iso_id):
+    data = get_country_clubs(iso_id).json
+    printer.pprint(data)
+
+
+country_clubs("DK")
+# club_members("tech-with-tim")
 # club_matches("tech-with-tim")
 # club_details("tech-with-tim")
 # get_most_recent_game("Ar5hv1r")
